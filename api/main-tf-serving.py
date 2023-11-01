@@ -11,7 +11,7 @@ app = FastAPI()
 endpoint = "http://localhost:8501/v1/models/AgroTech:predict"
 
 CLASS_NAMES = ['Early Blight', 'Late Blight', 'Healthy']
-# MODEL = tf.keras.models.load_model("New_Model.h5")
+# MODEL = tf.keras.models.load_model("api\Model\Model.h5")
 
 @app.get("/ping")
 async def ping():
