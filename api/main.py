@@ -15,14 +15,14 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["POST"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
 CLASS_NAMES = ['Early Blight', 'Late Blight', 'Healthy']
-MODEL = None  # We'll load the model inside the route function
+MODEL = tf.keras.models.load_model("saved_models/1")  # We'll load the model inside the route function
 
-@app.get("/ping")
+@app.get("/")
 async def ping():
     return "Hello, I am alive"
 
@@ -30,11 +30,11 @@ def read_file_as_image(data) -> np.ndarray:
     image = np.array(Image.open(BytesIO(data)))
     return image
 
-@app.on_event("startup")
-async def startup_event():
-    # Load the model when the app starts
-    global MODEL
-    MODEL = tf.keras.models.load_model("saved_models/1")
+# @app.on_event("startup")
+# async def startup_event():
+#     # Load the model when the app starts
+#     global MODEL
+#     MODEL = tf.keras.models.load_model("saved_models/1")
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
