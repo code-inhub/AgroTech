@@ -21,7 +21,7 @@ app.add_middleware(
 )
 
 CLASS_NAMES = ['Early Blight', 'Late Blight', 'Healthy']
-MODEL = tf.keras.models.load_model("D:\AgroTech\saved_models\\1")
+MODEL = tf.keras.models.load_model("New_Model.h5")
 
 @app.get("/ping")
 async def ping():
